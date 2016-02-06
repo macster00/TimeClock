@@ -1,6 +1,7 @@
 #updated 10/3
 import os
 import time
+import shutil
 import datetime
 import numpy as np
 import sys
@@ -14,7 +15,7 @@ import cv2
 #camera = cv2.VideoCapture(0)
 
 import sqlite3
-conn = sqlite3.connect('TCTest1.db', detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
+conn = sqlite3.connect('TCTest2.db', detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
 #CF_Employees
 c = conn.cursor()
 
@@ -65,9 +66,17 @@ class newTC:
             temp = self.get_image(camera)
 
         picture = self.get_image(camera)
-        #cv2.imshow('pic', picture)
+        cv2.imshow('pic', picture)
+        folder = "pictures/" + fname + " " + lname
         file = fname + "_" + lname + " " + date + ".png"
+        
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        
         cv2.imwrite(file, picture)
+        shutil.move(file, folder)
+        
+        
         #cv2.imshow('pic', picture)
         #cv2.waitKey(1000)
         #cv2.destroyAllWindows()

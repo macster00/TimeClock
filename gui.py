@@ -9,7 +9,7 @@ import Employee
 from Employee import Employee
 import newTC
 from newTC import *
-import mkTxt
+#import mkTxt
 
 time1 = ''
 
